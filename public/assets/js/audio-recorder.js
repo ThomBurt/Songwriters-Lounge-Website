@@ -59,20 +59,25 @@ navigator.mediaDevices.getUserMedia(constraintObj)
     let stop = document.getElementById('stop-btn');
     let vidSave = document.getElementById('vid2');
     let audio1 = document.getElementById('audio-1');
+    let voiceNoteText = document.getElementById('voice-note-text');
+    let recordingFlasher = document.getElementById('recording-icon');
     let mediaRecorder = new MediaRecorder(mediaStreamObj);
     let chunks = [];
 
    
     start.addEventListener('click', (ev)=>{
-        audio.play();
+       // audio.play();
         mediaRecorder.start();
+        recordingFlasher.classList.remove('hide');
+        voiceNoteText.classList.add('hide');
         //console.log(mediaRecorder.state);
     })
     stop.addEventListener('click', (ev)=>{
-        audio.pause();
+      //  audio.pause();
         mediaRecorder.stop();
         audio1.classList.add('hide');
         vidSave.classList.remove('hide');
+        recordingFlasher.classList.add('hide');
        // console.log(mediaRecorder.state);
     });
     mediaRecorder.ondataavailable = function(ev) {

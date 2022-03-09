@@ -146,3 +146,32 @@ body {
   margin-top: 20px;
   margin-left: 80px;
 }
+
+.recording-active {
+  text-align: center;
+  border-radius: 100%;
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+  background-color: #ff0000;
+  color: white;
+  animation: blinker 1s linear infinite;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+.voice-txt {
+  text-align: center;
+  padding: 10px;
+  background-color: darkcyan;
+  width: 70%;
+  color: white;
+  border-radius: 10px;
+}

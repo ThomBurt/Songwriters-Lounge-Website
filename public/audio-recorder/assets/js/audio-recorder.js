@@ -1,8 +1,3 @@
-//const testBTN = document.getElementById('test-btn').addEventListener('click', constraintObj)
-
-
-
-
 let constraintObj = { 
     audio: true, 
     video: false 
@@ -85,4 +80,15 @@ navigator.mediaDevices.getUserMedia(constraintObj)
 .catch(function(err) { 
     //console.log(err.name, err.message); 
 });
+
+
+const btn = document.querySelector('.vid-screen-2');
+const button2 = document.querySelector('.button2');
+
+function button2() {
+    btn.classList.remove('hide')
+}
+
+button2.addEventListener('click', button2);
+
 

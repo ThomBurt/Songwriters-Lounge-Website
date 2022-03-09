@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 // Sets up the static files
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 // parse application/json

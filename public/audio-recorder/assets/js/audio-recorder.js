@@ -72,7 +72,7 @@ navigator.mediaDevices.getUserMedia(constraintObj)
         audio.pause();
         mediaRecorder.stop();
         audio1.classList.add('hide');
-        sendBtn.classList.remove('hide');
+        vidSave.classList.remove('hide');
        // console.log(mediaRecorder.state);
     });
     mediaRecorder.ondataavailable = function(ev) {

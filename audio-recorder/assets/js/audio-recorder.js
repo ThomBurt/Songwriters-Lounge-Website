@@ -1,85 +1,84 @@
-jQuery(document).ready(function () {
-    var $ = jQuery;
-    var myRecorder = {
-        objects: {
-            context: null,
-            stream: null,
-            recorder: null
-        },
-        init: function () {
-            if (null === myRecorder.objects.context) {
-                myRecorder.objects.context = new (
-                        window.AudioContext || window.webkitAudioContext
-                        );
-            }
-        },
-        start: function () {
-            var options = {audio: true, video: false};
-            navigator.mediaDevices.getUserMedia(options).then(function (stream) {
-                myRecorder.objects.stream = stream;
-                myRecorder.objects.recorder = new Recorder(
-                        myRecorder.objects.context.createMediaStreamSource(stream),
-                        {numChannels: 1}
-                );
-                myRecorder.objects.recorder.record();
-            }).catch(function (err) {});
-        },
-        stop: function (listObject) {
-            if (null !== myRecorder.objects.stream) {
-                myRecorder.objects.stream.getAudioTracks()[0].stop();
-            }
-            if (null !== myRecorder.objects.recorder) {
-                myRecorder.objects.recorder.stop();
 
-                // Validate object
-                if (null !== listObject
-                        && 'object' === typeof listObject
-                        && listObject.length > 0) {
-                    // Export the WAV file
-                    myRecorder.objects.recorder.exportWAV(function (blob) {
-                        var url = (window.URL || window.webkitURL)
-                                .createObjectURL(blob);
+let constraintObj = { 
+    audio: true, 
+    video: false 
+    // { 
+    //     facingMode: "user", 
+    //     width: { min: 640, ideal: 1280, max: 1920 },
+    //     height: { min: 480, ideal: 720, max: 1080 } 
+    // } 
+}; 
+// width: 1280, height: 720  -- preference only
+// facingMode: {exact: "user"}
+// facingMode: "environment"
 
-                        // Prepare the playback
-                        var audioObject = $('<audio controls></audio>')
-                                .attr('src', url);
-
-                        // Prepare the download link
-                        var downloadObject = $('<a>&#9660;</a>')
-                                .attr('href', url)
-                                .attr('download', new Date().toUTCString() + '.wav');
-
-                        // Wrap everything in a row
-                        var holderObject = $('<div class="row"></div>')
-                                .append(audioObject)
-                                .append(downloadObject);
-
-                        // Append to the list
-                        listObject.append(holderObject);
-                    });
-                }
-            }
+//handle older browsers that might implement getUserMedia in some way
+if (navigator.mediaDevices === undefined) {
+    navigator.mediaDevices = {};
+    navigator.mediaDevices.getUserMedia = function(constraintObj) {
+        let getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+        if (!getUserMedia) {
+            return Promise.reject(new Error('getUserMedia is not implemented in this browser'));
         }
+        return new Promise(function(resolve, reject) {
+            getUserMedia.call(navigator, constraintObj, resolve, reject);
+        });
+    }
+}else{
+    navigator.mediaDevices.enumerateDevices()
+    .then(devices => {
+        devices.forEach(device=>{
+            console.log(device.kind.toUpperCase(), device.label);
+            //, device.deviceId
+        })
+    })
+    .catch(err=>{
+        console.log(err.name, err.message);
+    })
+}
+
+navigator.mediaDevices.getUserMedia(constraintObj)
+.then(function(mediaStreamObj) {
+    //connect the media stream to the first video element
+    let video = document.querySelector('video');
+    if ("srcObject" in video) {
+        video.srcObject = mediaStreamObj;
+    } else {
+        //old version
+        video.src = window.URL.createObjectURL(mediaStreamObj);
+    }
+    
+    video.onloadedmetadata = function(ev) {
+        //show in the video element what is being captured by the webcam
+        video.play();
     };
-
-    // Prepare the recordings list
-    var listObject = $('[data-role="recordings"]');
-
-    // Prepare the record button
-    $('[data-role="controls"] > button').click(function () {
-        // Initialize the recorder
-        myRecorder.init();
-
-        // Get the button state 
-        var buttonState = !!$(this).attr('data-recording');
-
-        // Toggle
-        if (!buttonState) {
-            $(this).attr('data-recording', 'true');
-            myRecorder.start();
-        } else {
-            $(this).attr('data-recording', '');
-            myRecorder.stop(listObject);
-        }
+    
+    //add listeners for saving video/audio
+    let start = document.getElementById('start-btn');
+    let stop = document.getElementById('stop-btn');
+    let vidSave = document.getElementById('vid2');
+    let mediaRecorder = new MediaRecorder(mediaStreamObj);
+    let chunks = [];
+    
+    start.addEventListener('click', (ev)=>{
+        mediaRecorder.start();
+        console.log(mediaRecorder.state);
+    })
+    stop.addEventListener('click', (ev)=>{
+        mediaRecorder.stop();
+        console.log(mediaRecorder.state);
     });
+    mediaRecorder.ondataavailable = function(ev) {
+        chunks.push(ev.data);
+    }
+    mediaRecorder.onstop = (ev)=>{
+        let blob = new Blob(chunks, { 'type' : 'video/mp4;' });
+        chunks = [];
+        let videoURL = window.URL.createObjectURL(blob);
+        vidSave.src = videoURL;
+    }
+})
+.catch(function(err) { 
+    //console.log(err.name, err.message); 
 });
+

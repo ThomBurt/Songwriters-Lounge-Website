@@ -1,16 +1,67 @@
-* {
-    background-color: aquamarine;
-    margin: 50px;
+body {
+   background-color: #000
 }
 
-.audio-main {
-    margin: 50px;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+  /* apply styles to <header> */
+  header {
+    padding: 6px 20px;
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    position: -webkit-sticky;
+    position:sticky;
+    top: 0;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-position: 80%;
+    z-index: 9999;
+    }
+  
+    header img {
+      -webkit-filter: drop-shadow(5px 5px 5px #222);
+      filter: drop-shadow(5px 5px 5px #222);
+      opacity: 1;
+      }
+    
+    
+    header a {
+      color: white;
+    }
+  
+    header nav {
+      display: inline;
+      float: right; 
+      margin: 35px 0;
+    }
+  
+    header nav ul li {
+      display: inline;
+      
+    }
+  
+    header nav ul li a {
+      margin: 0 30px;
+      font-weight: lighter;
+      font-size: 20px;
+    }
+  
+
+.container {
+    background-color: cyan;
     width: 100vw;
     height: 100vh;
 }
 
 
 .button {
+    margin: 10px;
     width: 220px;
     height: 50px;
     border: none;
@@ -71,9 +122,22 @@
 }
 
 
-.audio-screen-1 {
-    /* display: none; */
+
+
+.audio-main {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 5px solid darkcyan;
+    padding: 10px;
 }
-.audio-screen-2 {
-    /* display: none; */
+
+.audio-btns {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.hide {
+    display: none;
 }

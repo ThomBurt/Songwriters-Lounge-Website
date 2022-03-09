@@ -49,17 +49,16 @@ navigator.mediaDevices.getUserMedia(constraintObj)
     
 
     // this function played the audio when the page was loaded
-    audio.onloadedmetadata = function(ev) {
+    //audio.onloadedmetadata = function(ev) {
         //show in the audio element what is being captured by the webcam 
       //  audio.play();
-    };
+   // };
     
     //add listeners for saving video/audio
     let start = document.getElementById('start-btn');
     let stop = document.getElementById('stop-btn');
     let vidSave = document.getElementById('vid2');
     let audio1 = document.getElementById('audio-1');
-    let audio2 = document.querySelector('audio-screen-2');
     let mediaRecorder = new MediaRecorder(mediaStreamObj);
     let chunks = [];
 
@@ -73,13 +72,14 @@ navigator.mediaDevices.getUserMedia(constraintObj)
         audio.pause();
         mediaRecorder.stop();
         audio1.classList.add('hide');
+        sendBtn.classList.remove('hide');
        // console.log(mediaRecorder.state);
     });
     mediaRecorder.ondataavailable = function(ev) {
         chunks.push(ev.data);
     }
     mediaRecorder.onstop = (ev)=>{
-        let blob = new Blob(chunks, { 'type' : 'video/mp4;' });
+        let blob = new Blob(chunks, { 'type' : 'audio/wav;' });
         chunks = [];
         let videoURL = window.URL.createObjectURL(blob);
         vidSave.src = videoURL;
@@ -88,15 +88,5 @@ navigator.mediaDevices.getUserMedia(constraintObj)
 .catch(function(err) { 
     //console.log(err.name, err.message); 
 });
-
-
-// const btn = document.querySelector('.vid-screen-2');
-// const button2 = document.querySelector('.button2');
-
-// function button2() {
-//     btn.classList.remove('hide')
-// }
-
-// button2.addEventListener('click', button2);
 
 

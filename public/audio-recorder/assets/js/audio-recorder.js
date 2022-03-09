@@ -23,7 +23,7 @@ if (navigator.mediaDevices === undefined) {
             getUserMedia.call(navigator, constraintObj, resolve, reject);
         });
     }
-}else{
+ } else{
     navigator.mediaDevices.enumerateDevices()
     .then(devices => {
         devices.forEach(device=>{
@@ -39,33 +39,41 @@ if (navigator.mediaDevices === undefined) {
 navigator.mediaDevices.getUserMedia(constraintObj)
 .then(function(mediaStreamObj) {
     //connect the media stream to the first video element
-    let video = document.querySelector('video');
-    if ("srcObject" in video) {
-        video.srcObject = mediaStreamObj;
+    let audio = document.querySelector('audio');
+    if ("srcObject" in audio) {
+        audio.srcObject = mediaStreamObj;
     } else {
         //old version
-        video.src = window.URL.createObjectURL(mediaStreamObj);
+        audio.src = window.URL.createObjectURL(mediaStreamObj);
     }
     
-    video.onloadedmetadata = function(ev) {
-        //show in the video element what is being captured by the webcam
-        video.play();
+
+    // this function played the audio when the page was loaded
+    audio.onloadedmetadata = function(ev) {
+        //show in the audio element what is being captured by the webcam 
+      //  audio.play();
     };
     
     //add listeners for saving video/audio
     let start = document.getElementById('start-btn');
     let stop = document.getElementById('stop-btn');
     let vidSave = document.getElementById('vid2');
+    let audio1 = document.getElementById('audio-1');
+    let audio2 = document.querySelector('audio-screen-2');
     let mediaRecorder = new MediaRecorder(mediaStreamObj);
     let chunks = [];
-    
+
+   
     start.addEventListener('click', (ev)=>{
+        audio.play();
         mediaRecorder.start();
-        console.log(mediaRecorder.state);
+        //console.log(mediaRecorder.state);
     })
     stop.addEventListener('click', (ev)=>{
+        audio.pause();
         mediaRecorder.stop();
-        console.log(mediaRecorder.state);
+        audio1.classList.add('hide');
+       // console.log(mediaRecorder.state);
     });
     mediaRecorder.ondataavailable = function(ev) {
         chunks.push(ev.data);
@@ -82,13 +90,13 @@ navigator.mediaDevices.getUserMedia(constraintObj)
 });
 
 
-const btn = document.querySelector('.vid-screen-2');
-const button2 = document.querySelector('.button2');
+// const btn = document.querySelector('.vid-screen-2');
+// const button2 = document.querySelector('.button2');
 
-function button2() {
-    btn.classList.remove('hide')
-}
+// function button2() {
+//     btn.classList.remove('hide')
+// }
 
-button2.addEventListener('click', button2);
+// button2.addEventListener('click', button2);
 
 

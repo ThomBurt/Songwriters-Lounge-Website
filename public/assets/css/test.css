@@ -84,7 +84,7 @@ header {
     margin: 5px auto;
     -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
-    background-color: #101010;
+    background-color: white;
 }
 
 .nav-menu {
@@ -157,7 +157,7 @@ header {
             left: -100%;
             top: 5rem;
             flex-direction: column;
-            background-color: #fff;
+            background-color: black;
             width: 100%;
             border-radius: 10px;
             text-align: center;

@@ -88,6 +88,7 @@ navigator.mediaDevices.getUserMedia(constraintObj)
         chunks = [];
         let videoURL = window.URL.createObjectURL(blob);
         vidSave.src = videoURL;
+        chunks.push(videoURL);
     }
 })
 .catch(function(err) { 

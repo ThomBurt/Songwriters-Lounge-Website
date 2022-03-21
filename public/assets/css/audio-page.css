@@ -13,12 +13,18 @@ header {
   background-color: #000;
 }
 
-.container-fluid {
-    background-color: cyan;
-    width: 100vw;
-    height: 100vh;
-    max-width: 10h%;
+.hero-find-us {
+  padding: 300px;
+  background-image: url('/assets/images/sl-fine-us.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  background-attachment: fixed;
 }
+
 
 
 .button {
@@ -84,12 +90,12 @@ header {
 
 
 
-
 .audio-main {
+  background-color: #2c9fa8;
+  border-radius: 10px;
     position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    left: 3%;
+    top: 30%;
     border: 5px solid darkcyan;
     padding: 10px;
 }
@@ -129,10 +135,7 @@ header {
 }
 
 .voice-txt {
-  text-align: center;
-  padding: 10px;
-  background-color: darkcyan;
-  width: 70%;
+  font-size: 25px;
   color: white;
-  border-radius: 10px;
+  text-align: center;
 }

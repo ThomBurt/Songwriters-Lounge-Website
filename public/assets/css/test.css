@@ -45,7 +45,7 @@ header {
     top: 25%;
     padding: 30px;
     width: 40vw;
-    height: 60vh;
+    height: 65vh;
     text-align: center;
   }
 
@@ -193,6 +193,12 @@ header {
     
     }
 
+
+.follow-us {
+    color: #E2E8F0;
+    text-decoration: underline;
+    margin-bottom: 10px;
+}
 
     .icon {
         justify-content: center;

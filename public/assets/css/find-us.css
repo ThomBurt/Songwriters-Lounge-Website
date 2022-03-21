@@ -2,6 +2,26 @@
     font-family: 'Poppins', sans-serif;
 }
 
+
+header {
+    padding: 20px 35px;
+    background-color: var(--tertiary-color);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    position: -webkit-sticky;
+    position:sticky;
+    top: 0;
+    background-image: url('/assets/images/sl-fine-us.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-position: 80%;
+    z-index: 9999;
+  }
+
+
+
 .hero-find-us {
     padding: 300px;
     background-image: url('/assets/images/sl-fine-us.jpg');
@@ -38,4 +58,26 @@
       font-size: 55px;
       color: #f57de3;
       transition: 0.2s;
+  }
+
+  footer {
+    background: black;
+    width: 100%;
+    padding: 20px 35px;
+    text-align: center;
+  }
+  footer h2 {
+    display: inline;
+    color: white;
+    font-size: 30px;
+    margin: 0;
+  }
+  footer div {
+    float: right;
+    line-height: 1.5;
+    text-align: right;
+  }
+  footer a {
+    color: white;
+    margin: 10px 10px 10px 10px;
   }

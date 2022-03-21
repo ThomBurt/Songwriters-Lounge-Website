@@ -36,12 +36,31 @@ header {
     background-attachment: fixed;
   }
   
-  
   .hero-text {
-    flex: 1;
-    background-color: black;
+    opacity: 0.9;
+    background-color:#c1315a;
+    border-radius: 10px;
+    position: absolute;
+    left: 1%;
+    top: 25%;
     padding: 30px;
+    width: 40vw;
+    height: 60vh;
+    text-align: center;
   }
+
+  .title {
+    font-size: 40px;
+    color: white;
+    text-decoration: underline;
+    margin-bottom: 30px;
+}
+
+.list-p {
+    font-size: 15px;
+    margin-top: 10px;
+    color: white;
+}
 
   .header{
     border-bottom: 1px solid #E2E8F0;
@@ -172,4 +191,22 @@ header {
         transform: translateY(-8px) rotate(-45deg);
     }
     
+    }
+
+
+    .icon {
+        justify-content: center;
+        color: white;
+        font-size: 30px;
+        margin: 15px;
+        margin-top: 60px;
+    }
+    .icon:hover {
+        font-size: 35px;
+        color: #f57de3;
+        transition: 0.2s;
+    }
+
+    .icon-div {
+        margin-top: 30px;
     }

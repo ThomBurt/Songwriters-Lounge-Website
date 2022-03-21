@@ -1,5 +1,6 @@
 body {
-   background-color: #000
+   background-color: #000;
+   overflow-x: hidden;
 }
 
 * {
@@ -12,10 +13,11 @@ header {
   background-color: #000;
 }
 
-.container {
+.container-fluid {
     background-color: cyan;
     width: 100vw;
     height: 100vh;
+    max-width: 10h%;
 }
 
 

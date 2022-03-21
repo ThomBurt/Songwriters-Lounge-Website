@@ -1,13 +1,17 @@
+body {
+  overflow-x:hidden;
+}
+
 .container-fluid{
-    background-color: aqua;
+  background-color: black;
     width: 100vw;
     height: 100vh;
 }
 
 .sideByside {
+  margin: 0;
     display: flex;
     flex-wrap: wrap;
-    width: 100vw;
 
 }
 .text1 {
